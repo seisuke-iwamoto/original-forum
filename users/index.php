@@ -25,7 +25,7 @@ if (!empty($_POST)) {
   }
 }
 
-// 入力内容にエラーがあった場合に入力フィールドに入力していた内容を再現
+// 確認画面から入力画面に戻った際に入力内容を再現
 if ($_REQUEST['action'] == 'rewrite') {
   $_POST = $_SESSION['join'];
   $error['rewrite'] = true;
