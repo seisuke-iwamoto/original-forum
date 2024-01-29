@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?></title>
-    <link rel="stylesheet" href="./assets/css/style.css?<?php echo time(); ?>">
+    <link rel="stylesheet" href="../assets/css/style.css?<?php echo time(); ?>">
+    <script defer src="../assets/js/script.js"></script>
 </head>
 
 <body class="bg-gray-100">
