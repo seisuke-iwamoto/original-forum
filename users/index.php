@@ -1,5 +1,5 @@
 <?php
-// require('../dbconnect.php');
+require('../dbconect.php');
 session_start();
 
 // $_POSTが空でないかをチェック
@@ -22,6 +22,16 @@ if (!empty($_POST)) {
     $_SESSION['join'] = $_POST;
     header('Location: check.php');
     exit();
+  }
+}
+
+// 重複アカウントのチェック
+if (empty($error)) {
+  $member = $db->prepare('SELECT COUNT(*) AS cnt FROM users WHERE username=?');
+  $member->execute(array($_POST['username']));
+  $record = $member->fetch();
+  if ($record['cnt'] > 0) {
+    $error['username'] = 'duplicate';
   }
 }
 
@@ -49,6 +59,10 @@ require_once('../template/header.php');
         <?php if ($error['username'] == 'blank') : ?>
           <p class="text-red-500 font-bold text-sm py-2">ユーザーネームを入力してください</p>
         <?php endif; ?>
+        <?php if ($error['username'] == 'duplicate') : ?>
+          <p class="text-red-500 font-bold text-sm py-2">そのユーザーネームはすでに登録されています
+          </p>
+        <?php endif; ?>
       </div>
       <div class="mb-6">
         <label for="password" class="block text-gray-700 text-sm font-bold mb-2">パスワード</label>
@@ -68,11 +82,11 @@ require_once('../template/header.php');
           </p>
         <?php endif; ?>
       </div>
-      <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          送信
+      <div class="text-center">
+        <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold inline-block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          入力内容を確認する
         </button>
-        <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">
+        <a href="#" class="inline-block mt-2 align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">
           既に会員の方はこちらから ログイン
         </a>
       </div>
