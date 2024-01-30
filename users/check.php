@@ -1,10 +1,23 @@
 <?php
 session_start();
-// require('../dbconnect.php');
+require('../dbconect.php');
 
 // 入力画面でセッション「join」が保存されたかをチェック
 if (!isset($_SESSION['join'])) {
   header('Location: index.php');
+  exit();
+}
+
+// 登録処理をする
+if (!empty($_POST)) {
+  $statement = $db->prepare('INSERT INTO users SET username=?, password=?, created=NOW()');
+  echo $ret = $statement->execute(array(
+    $_SESSION['join']['username'],
+    sha1($_SESSION['join']['password']),
+  ));
+  unset($_SESSION['join']);
+
+  header('Location: thanks.php');
   exit();
 }
 ?>
@@ -16,6 +29,7 @@ require_once('../template/header.php');
 ?>
 
 <form action="" method="POST" class="mx-auto my-8">
+  <input type="hidden" name="action" value="submit">
   <div class="max-w-sm mx-auto bg-white rounded-lg shadow-lg p-6">
     <h2 class="font-bold text-xl mb-4">会員登録内容確認</h2>
     <div class="mb-4">
@@ -36,7 +50,7 @@ require_once('../template/header.php');
           <a href="index.php?action=rewrite" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">戻る</a>
         </li>
         <li>
-          <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">登録完了</button>
+          <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">登録する</button>
         </li>
       </ul>
     </div>
