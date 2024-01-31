@@ -695,6 +695,10 @@ video {
   align-items: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -934,6 +938,11 @@ video {
 .hover\:bg-\[\#fd9f4d\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(253 159 77 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 .hover\:text-blue-800:hover {
