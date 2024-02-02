@@ -17,21 +17,21 @@ if (!empty($_POST)) {
     $error['password'] = 'blank';
   }
 
+  // 重複アカウントのチェック
+  if (empty($error)) {
+    $member = $db->prepare('SELECT COUNT(*) AS cnt FROM users WHERE username=?');
+    $member->execute(array($_POST['username']));
+    $record = $member->fetch();
+    if ($record['cnt'] > 0) {
+      $error['username'] = 'duplicate';
+    }
+  }
+
   // 入力内容にエラーがなければセッションに値を保存して確認画面へ進む
   if (empty($error)) {
     $_SESSION['join'] = $_POST;
     header('Location: check.php');
     exit();
-  }
-}
-
-// 重複アカウントのチェック
-if (empty($error)) {
-  $member = $db->prepare('SELECT COUNT(*) AS cnt FROM users WHERE username=?');
-  $member->execute(array($_POST['username']));
-  $record = $member->fetch();
-  if ($record['cnt'] > 0) {
-    $error['username'] = 'duplicate';
   }
 }
 
@@ -60,8 +60,7 @@ require_once('../template/header.php');
           <p class="text-red-500 font-bold text-sm py-2">ユーザーネームを入力してください</p>
         <?php endif; ?>
         <?php if ($error['username'] == 'duplicate') : ?>
-          <p class="text-red-500 font-bold text-sm py-2">そのユーザーネームはすでに登録されています
-          </p>
+          <p class="text-red-500 font-bold text-sm py-2">指定されたユーザーネームはすでに登録されています</p>
         <?php endif; ?>
       </div>
       <div class="mb-6">
