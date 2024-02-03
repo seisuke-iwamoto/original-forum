@@ -81,11 +81,11 @@ require_once('../template/header.php');
           </p>
         <?php endif; ?>
       </div>
-      <div class="text-center">
-        <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold inline-block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      <div class="flex flex-col">
+        <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           入力内容を確認する
         </button>
-        <a href="../login/" class="inline-block mt-2 align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">
+        <a href="../login/" class="block mt-2 align-baseline font-bold text-sm text-center text-blue-500 hover:text-blue-800 duration-300">
           既に会員の方はこちらから ログイン
         </a>
       </div>
