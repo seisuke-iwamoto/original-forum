@@ -25,6 +25,7 @@ if (isset($_SESSION['id'])) { //ログインしているとき
 </head>
 
 <body class="bg-gray-100">
+  <div class="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen">
   <header class="py-4">
     <div class="bg-white shadow-md rounded-full py-4 px-8 mx-auto w-[95%] max-w-7xl flex justify-between items-center">
       <div class="logo">
