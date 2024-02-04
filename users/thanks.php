@@ -10,7 +10,7 @@ require_once('../template/header.php');
       <p class="mb-4">会員登録が正常に完了しました。ありがとうございます！</p>
       <div class="flex items-center justify-between">
         <a href="index.php" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">ホームページに戻る</a>
-        <a href="login.php" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">ログインページへ</a>
+        <a href="../login/" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">ログインページへ</a>
       </div>
     </div>
 </div>
