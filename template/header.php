@@ -50,7 +50,7 @@ if (isset($_SESSION['id'])) { //ログインしているとき
               </a>
             </li>
             <li>
-              <a class="bg-[#fc7f11] hover:bg-[#fd9f4d] duration-300 text-white block py-2 px-4 rounded" href="../users/">新規登録
+              <a class="bg-[#fc7f11] hover:bg-[#fd9f4d] duration-300 text-white block py-2 px-4 rounded" href="../users/add.php">新規登録
               </a>
             </li>
           <?php endif; ?>
