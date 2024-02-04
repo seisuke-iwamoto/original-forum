@@ -29,7 +29,9 @@ if (isset($_SESSION['id'])) { //ログインしているとき
   <header class="py-4">
     <div class="bg-white shadow-md rounded-full py-4 px-8 mx-auto w-[95%] max-w-7xl flex justify-between items-center">
       <div class="logo">
-        <h1 class="text-black">Yahoo!知恵袋の様な掲示板サイト</h1>
+        <h1 class="text-black">
+          <a href="../questions/" class="hover:opacity-70">Yahoo!知恵袋の様な掲示板サイト</a>
+        </h1>
       </div>
       <nav>
         <ul class="flex gap-4 items-center">
