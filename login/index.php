@@ -67,7 +67,7 @@ require_once('../template/header.php');
         <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold inline-block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           ログイン
         </button>
-        <a href="../users/" class="block mt-2 align-baseline font-bold text-sm text-center text-blue-500 hover:text-blue-800 duration-300">
+        <a href="../users/add.php" class="block mt-2 align-baseline font-bold text-sm text-center text-blue-500 hover:text-blue-800 duration-300">
           会員登録がまだの方はこちら
         </a>
       </div>
