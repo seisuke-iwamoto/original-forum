@@ -35,10 +35,7 @@ if (isset($_SESSION['id'])) { //ログインしているとき
           <?php if (isset($_SESSION['id'])) : ?>
             <li>
               <a class="hover:opacity-70 duration-300 text-black flex flex-col gap-2 items-center" href="../users/add/">
-                <div class="max-w-20">
-                  <img src="../assets/img/mypage-icon.png" alt="" width="80" height="80" class="w-full h-full object-cover object-center">
-                </div>
-                <span>マイページ</span>
+                マイページ
               </a>
             </li>
             <li>
