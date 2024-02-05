@@ -12,17 +12,17 @@ if (!isset($_SESSION['join'])) {
 }
 
 // 登録処理をする
-if (!empty($_POST)) {
-  $statement = $db->prepare('INSERT INTO users SET username=?, password=?, create_date=NOW()');
-  echo $ret = $statement->execute(array(
-    $_SESSION['join']['username'],
-    sha1($_SESSION['join']['password']),
-  ));
-  unset($_SESSION['join']);
+// if (!empty($_POST)) {
+//   $statement = $db->prepare('INSERT INTO users SET username=?, password=?, create_date=NOW()');
+//   echo $ret = $statement->execute(array(
+//     $_SESSION['join']['username'],
+//     sha1($_SESSION['join']['password']),
+//   ));
+//   unset($_SESSION['join']);
   
-  header('Location: thanks.php');
-  exit();
-}
+//   header('Location: thanks.php');
+//   exit();
+// }
 ?>
 
 <?php
@@ -33,7 +33,7 @@ require_once($root_pass . 'template/header.php');
 
 <form action="thanks.php" method="POST" class="mx-auto my-8">
   <!-- <input type="hidden" name="action" value="submit"> -->
-  <div class="max-w-sm mx-auto bg-white rounded-lg shadow-lg p-6">
+  <div class="w-96 mx-auto bg-white rounded-lg shadow-lg p-6">
     <h2 class="font-bold text-xl mb-4">会員登録内容確認</h2>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">ユーザーネーム</label>

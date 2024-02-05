@@ -640,6 +640,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -691,6 +695,10 @@ video {
 
 .w-\[95\%\] {
   width: 95%;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .max-w-sm {
