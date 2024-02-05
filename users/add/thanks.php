@@ -8,7 +8,7 @@ require($root_pass . 'dbconect.php');
 // 入力画面でセッション「join」が保存されていたら登録処理を実施
 if (isset($_SESSION['join'])) {
   $statement = $db->prepare('INSERT INTO users SET username=?, password=?, create_date=NOW()');
-  echo $ret = $statement->execute(array(
+  $ret = $statement->execute(array(
     $_SESSION['join']['username'],
     sha1($_SESSION['join']['password']),
   ));
@@ -23,14 +23,14 @@ require_once($root_pass . 'template/header.php');
 ?>
 
 <div class="container mx-auto my-8">
-    <div class="w-96 mx-auto bg-white rounded-lg shadow-lg p-6">
-      <h2 class="font-bold text-xl mb-4">会員登録完了</h2>
-      <p class="mb-4">会員登録が正常に完了しました。ありがとうございます！</p>
-      <div class="flex items-center justify-between mt-5">
-        <a href="index.php" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">ホームページに戻る</a>
-        <a href="<?php echo $root_pass; ?>login/" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">ログインページへ</a>
-      </div>
+  <div class="w-96 mx-auto bg-white rounded-lg shadow-lg p-6">
+    <h2 class="font-bold text-xl mb-4">会員登録完了</h2>
+    <p class="mb-4">会員登録が正常に完了しました。ありがとうございます！</p>
+    <div class="flex items-center justify-between mt-5">
+      <a href="index.php" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">ホームページに戻る</a>
+      <a href="<?php echo $root_pass; ?>login/" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 duration-300">ログインページへ</a>
     </div>
+  </div>
 </div>
 
 <?php
