@@ -53,7 +53,7 @@ require_once($root_pass . 'template/header.php');
           <a href="index.php?action=rewrite" class="bg-gray-100 hover:bg-gray-300 duration-300 text-black font-bold block py-2 px-4 rounded focus:outline-none focus:shadow-outline">戻る</a>
         </li>
         <li>
-          <button type="button" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">登録する</button>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">登録する</button>
         </li>
       </ul>
     </div>
