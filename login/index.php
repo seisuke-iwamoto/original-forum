@@ -1,5 +1,7 @@
 <?php
-require('../dbconect.php');
+// ディレクトリ階層に合わせてファイルパスを定義
+$root_pass = '../';
+require($root_pass . 'dbconect.php');
 session_start();
 
 if (!empty($_POST)) {
@@ -37,7 +39,7 @@ if (!empty($_POST)) {
 <?php
 // ヘッダー
 $pageTitle = '会員登録画面';
-require_once('../template/header.php');
+require_once($root_pass . 'template/header.php');
 ?>
 
 <!-- ログイン画面 -->
@@ -67,7 +69,7 @@ require_once('../template/header.php');
         <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold inline-block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           ログイン
         </button>
-        <a href="../users/add.php" class="block mt-2 align-baseline font-bold text-sm text-center text-blue-500 hover:text-blue-800 duration-300">
+        <a href="<?php echo $root_pass; ?>users/add" class="block mt-2 align-baseline font-bold text-sm text-center text-blue-500 hover:text-blue-800 duration-300">
           会員登録がまだの方はこちら
         </a>
       </div>
@@ -77,5 +79,5 @@ require_once('../template/header.php');
 
 <?php
 // フッター
-require_once('../template/footer.php');
+require_once($root_pass . 'template/footer.php');
 ?>
