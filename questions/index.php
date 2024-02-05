@@ -1,7 +1,9 @@
 <?php
+// ディレクトリ階層に合わせてファイルパスを定義
+$root_pass = '../';
 // ヘッダー
 $pageTitle = 'Yahoo!知恵袋の様な掲示板サイト';
-require_once('../template/header.php');
+require_once($root_pass . 'template/header.php');
 ?>
 
 <!-- 投稿カード -->
@@ -18,5 +20,5 @@ require_once('../template/header.php');
 
 <?php
 // フッター
-require_once('../template/footer.php');
+require_once($root_pass . 'template/footer.php');
 ?>
