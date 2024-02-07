@@ -24,37 +24,37 @@ if (isset($_SESSION['id'])) { //ログインしているとき
 
 <body class="bg-gray-100">
   <div class="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen">
-  <header class="py-4">
-    <div class="bg-white shadow-md rounded-full py-4 px-8 mx-auto w-[95%] max-w-7xl flex justify-between items-center">
-      <div class="logo">
-        <h1 class="text-black">
-          <a href="<?php echo $root_pass . 'questions/'; ?>" class="hover:opacity-70">Yahoo!知恵袋の様な掲示板サイト</a>
-        </h1>
+    <header class="py-4">
+      <div class="bg-white shadow-md rounded-full py-4 px-8 mx-auto container flex justify-between items-center">
+        <div class="logo">
+          <h1 class="text-black">
+            <a href="<?php echo $root_pass . 'questions/'; ?>" class="hover:opacity-70">Yahoo!知恵袋の様な掲示板サイト</a>
+          </h1>
+        </div>
+        <nav>
+          <ul class="flex gap-2 items-center">
+            <?php if (isset($_SESSION['id'])) : ?>
+              <li>
+                <a class="hover:underline  text-black flex flex-col gap-2 items-center" href="<?php echo $root_pass; ?>">
+                  マイページ
+                </a>
+              </li>
+              <li>
+                <a class="hover:underline  text-black block py-2 px-4 rounded" href="<?php echo $root_pass; ?>logout/">ログアウト
+                </a>
+              </li>
+            <?php else : ?>
+              <li>
+                <a class="hover:underline text-black block py-2 px-4 rounded" href="<?php echo $root_pass; ?>login/">
+                  ログイン
+                </a>
+              </li>
+              <li>
+                <a class="bg-[#fc7f11] hover:bg-[#fd9f4d] duration-300 text-white block py-2 px-4 rounded" href="<?php echo $root_pass; ?>users/add">新規登録
+                </a>
+              </li>
+            <?php endif; ?>
+          </ul>
+        </nav>
       </div>
-      <nav>
-        <ul class="flex gap-4 items-center">
-          <?php if (isset($_SESSION['id'])) : ?>
-            <li>
-              <a class="hover:underline  text-black flex flex-col gap-2 items-center" href="<?php echo $root_pass; ?>">
-                マイページ
-              </a>
-            </li>
-            <li>
-              <a class="bg-gray-200 hover:bg-gray-400 duration-300 text-black block py-2 px-4 rounded" href="<?php echo $root_pass; ?>logout/">ログアウト
-              </a>
-            </li>
-          <?php else : ?>
-            <li>
-              <a class="bg-black hover:bg-[#404040] duration-300 text-white block py-2 px-4 rounded" href="<?php echo $root_pass; ?>login/">
-                ログイン
-              </a>
-            </li>
-            <li>
-              <a class="bg-[#fc7f11] hover:bg-[#fd9f4d] duration-300 text-white block py-2 px-4 rounded" href="<?php echo $root_pass; ?>users/add">新規登録
-              </a>
-            </li>
-          <?php endif; ?>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    </header>
