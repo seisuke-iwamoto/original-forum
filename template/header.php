@@ -19,38 +19,45 @@ if (isset($_SESSION['id'])) { //ログインしているとき
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $pageTitle; ?></title>
   <link rel="stylesheet" href="<?php echo $root_pass; ?>assets/css/style.css?<?php echo time(); ?>">
-  <script defer src="<?php echo $root_pass; ?>assets/js/script.js"></script>
+  <script defer src="<?php echo $root_pass; ?>assets/js/script.js?<?php echo time(); ?>"></script>
 </head>
 
 <body class="bg-gray-100">
   <div class="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen">
-    <header class="py-4">
-      <div class="bg-white shadow-md rounded-full py-4 px-8 mx-auto container flex justify-between items-center">
+    <header class="py-4 h-20">
+      <div class="bg-white shadow-md rounded-full h-[inherit] px-8 mx-auto container flex justify-between items-center">
         <div class="logo">
           <h1 class="text-black">
             <a href="<?php echo $root_pass . 'questions/'; ?>" class="hover:opacity-70">Yahoo!知恵袋の様な掲示板サイト</a>
           </h1>
         </div>
-        <nav>
-          <ul class="flex gap-2 items-center">
+        <nav class="h-[inherit]">
+          <ul class="flex items-center h-[inherit]">
             <?php if (isset($_SESSION['id'])) : ?>
-              <li>
-                <a class="hover:underline  text-black flex flex-col gap-2 items-center" href="<?php echo $root_pass; ?>">
+              <li class="h-[inherit]">
+                <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4" href="<?php echo $root_pass; ?>">
                   マイページ
                 </a>
               </li>
-              <li>
-                <a class="hover:underline  text-black block py-2 px-4 rounded" href="<?php echo $root_pass; ?>logout/">ログアウト
+              <li id="dropDownMenu" class="relative h-[inherit]">
+                <a href="#" class="hover:underline text-black flex items-center justify-center h-[inherit] px-4 rounded">設定</a>
+                <ul class="hidden absolute -bottom-20 left-0 bg-white shadow-md min-w-max">
+                  <li><a href="<?php echo $root_pass; ?>users/edit" class="hover:underline text-black block py-2 px-4">ユーザー名変更</a></li>
+                  <li><a href="<?php echo $root_pass; ?>users/password" class="hover:underline text-black block py-2 px-4">パスワード更新</a></li>
+                </ul>
+              </li>
+              <li class="h-[inherit]">
+                <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4 rounded" href="<?php echo $root_pass; ?>logout/">ログアウト
                 </a>
               </li>
             <?php else : ?>
-              <li>
-                <a class="hover:underline text-black block py-2 px-4 rounded" href="<?php echo $root_pass; ?>login/">
+              <li class="h-[inherit]">
+                <a class="hover:underline text-black flex items-center justify-center h-[inherit] px-4 rounded" href="<?php echo $root_pass; ?>login/">
                   ログイン
                 </a>
               </li>
               <li>
-                <a class="bg-[#fc7f11] hover:bg-[#fd9f4d] duration-300 text-white block py-2 px-4 rounded" href="<?php echo $root_pass; ?>users/add">新規登録
+                <a class="bg-[#fc7f11] hover:bg-[#fd9f4d] duration-300 text-white block py-2 px-4 mx-4 rounded" href="<?php echo $root_pass; ?>users/add">新規登録
                 </a>
               </li>
             <?php endif; ?>
