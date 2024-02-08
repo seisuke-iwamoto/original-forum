@@ -43,8 +43,8 @@ require_once($root_pass . 'template/header.php');
 ?>
 
 <!-- ログイン画面 -->
-<div class="container mx-auto my-8">
-  <div class="max-w-sm mx-auto bg-white rounded-lg shadow-lg p-6">
+<div class="flex items-center justify-center container mx-auto my-8">
+  <div class="w-96 mx-auto bg-white rounded-lg shadow-lg p-6">
     <h2 class="font-bold text-xl mb-4">ログイン</h2>
     <form action="" method="POST">
       <div class="mb-4">

@@ -51,7 +51,7 @@ require_once($root_pass . 'template/header.php');
 ?>
 
 <!-- 会員登録フォーム -->
-<div class="container mx-auto my-8">
+<div class="flex items-center justify-center container mx-auto my-8">
   <div class="w-96 mx-auto bg-white rounded-lg shadow-lg p-6">
     <h2 class="font-bold text-xl mb-4">会員登録</h2>
     <form action="" method="POST">
