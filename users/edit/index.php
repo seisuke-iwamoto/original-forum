@@ -4,13 +4,10 @@ $root_pass = '../../';
 require($root_pass . 'dbconect.php');
 session_start();
 
-// セッションからusernameを取得
+// ログインしているユーザーのidと合致するニックネームをDBから検索
 $userid = $_SESSION['id'];
-// SQLクエリの準備
 $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
-// バインド変数に値をセット
 $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
-// クエリ実行
 $stmt->execute();
 
 // 結果を取得
@@ -21,13 +18,22 @@ if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
   echo "該当するユーザーが見つかりません。";
 }
 
-// ニックネームの変更をDBへ登録
-if($_POST['nickname']) {
-  $statement = $db->prepare('UPDATE users SET nickname=? WHERE id = :id');
+// ニックネームの変更があればDBを更新
+if ($_POST['nickname']) {
+  $statement = $db->prepare('UPDATE users SET nickname = :nickname WHERE id = :id');
+  $statement->bindParam(':nickname', $_POST['nickname'], PDO::PARAM_STR);
   $statement->bindParam(':id', $userid, PDO::PARAM_STR);
-  $ret = $statement->execute(array(
-    $_POST['nickname']
-  ));
+  $ret = $statement->execute();
+
+  // DBの更新が成功した場合、新しいニックネームを再取得
+  if ($ret) {
+    $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
+    $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
+    $stmt->execute();
+    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      $nickname = $row['nickname'];
+    }
+  }
 }
 ?>
 
