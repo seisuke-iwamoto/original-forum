@@ -27,6 +27,7 @@ if (isset($_SESSION['id'])) {
     $statement->bindParam(':nickname', $_POST['nickname'], PDO::PARAM_STR);
     $statement->bindParam(':id', $userid, PDO::PARAM_STR);
     $ret = $statement->execute();
+    $status = 'complete';
 
     // DBの更新が成功した場合、新しいニックネームを再取得
     if ($ret) {
@@ -60,6 +61,11 @@ require_once($root_pass . 'template/header.php');
         <label for="username" class="block text-gray-700 text-sm font-bold mb-2">ニックネーム</label>
         <input type="text" id="nickname" name="nickname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="<?php echo $nickname; ?>">
       </div>
+      <?php if ($status == 'complete') : ?>
+        <p class="text-green-400 font-bold text-sm pt-4">
+          ニックネームを変更しました
+        </p>
+      <?php endif; ?>
       <div class="flex flex-col">
         <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           変更する
