@@ -1,39 +1,47 @@
 <?php
+ob_start();
 // ディレクトリ階層に合わせてファイルパスを定義
 $root_pass = '../../';
 require($root_pass . 'dbconect.php');
 session_start();
 
-// ログインしているユーザーのidと合致するニックネームをDBから検索
-$userid = $_SESSION['id'];
-$stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
-$stmt->bindParam(':id', $userid, PDO::PARAM_STR);
-$stmt->execute();
+// ログインしているか確認
+if (isset($_SESSION['id'])) {
+  // ログインしているユーザーのidと合致するニックネームをDBから検索
+  $userid = $_SESSION['id'];
+  $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
+  $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
+  $stmt->execute();
 
-// 結果を取得
-if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-  // nicknameを取得
-  $nickname = $row['nickname'];
-} else {
-  echo "該当するユーザーが見つかりません。";
-}
+  // 結果を取得
+  if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    // nicknameを取得
+    $nickname = $row['nickname'];
+  } else {
+    echo "該当するユーザーが見つかりません。";
+  }
 
-// ニックネームの変更があればDBを更新
-if ($_POST['nickname']) {
-  $statement = $db->prepare('UPDATE users SET nickname = :nickname WHERE id = :id');
-  $statement->bindParam(':nickname', $_POST['nickname'], PDO::PARAM_STR);
-  $statement->bindParam(':id', $userid, PDO::PARAM_STR);
-  $ret = $statement->execute();
+  // ニックネームの変更があればDBを更新
+  if ($_POST['nickname']) {
+    $statement = $db->prepare('UPDATE users SET nickname = :nickname WHERE id = :id');
+    $statement->bindParam(':nickname', $_POST['nickname'], PDO::PARAM_STR);
+    $statement->bindParam(':id', $userid, PDO::PARAM_STR);
+    $ret = $statement->execute();
 
-  // DBの更新が成功した場合、新しいニックネームを再取得
-  if ($ret) {
-    $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
-    $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
-    $stmt->execute();
-    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $nickname = $row['nickname'];
+    // DBの更新が成功した場合、新しいニックネームを再取得
+    if ($ret) {
+      $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
+      $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
+      $stmt->execute();
+      if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $nickname = $row['nickname'];
+      }
     }
   }
+} else {
+  // ログインしてなければログイン画面へ
+  header('Location: ../../login/');
+  exit();
 }
 ?>
 
