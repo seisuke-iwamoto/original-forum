@@ -38,7 +38,7 @@ if (!empty($_POST)) {
 
 <?php
 // ヘッダー
-$pageTitle = '会員登録画面';
+$page_title = '会員登録画面';
 require_once($root_pass . 'template/header.php');
 ?>
 

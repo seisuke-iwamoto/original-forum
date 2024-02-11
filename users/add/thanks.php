@@ -18,7 +18,7 @@ if (isset($_SESSION['join'])) {
 
 <?php
 // ヘッダー
-$pageTitle = '会員登録完了画面';
+$page_title = '会員登録完了画面';
 require_once($root_pass . 'template/header.php');
 ?>
 

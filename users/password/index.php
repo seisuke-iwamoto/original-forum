@@ -53,7 +53,7 @@ if (isset($_SESSION['id'])) {
 
 <?php
 // ヘッダー
-$pageTitle = 'パスワード更新画面';
+$page_title = 'パスワード更新画面';
 require_once($root_pass . 'template/header.php');
 ?>
 

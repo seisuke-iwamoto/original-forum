@@ -2,7 +2,7 @@
 // ディレクトリ階層に合わせてファイルパスを定義
 $root_pass = '../';
 // ヘッダー
-$pageTitle = 'Yahoo!知恵袋の様な掲示板サイト';
+$page_title = 'Yahoo!知恵袋の様な掲示板サイト';
 require_once($root_pass . 'template/header.php');
 ?>
 

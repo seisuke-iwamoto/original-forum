@@ -9,7 +9,7 @@ $username = $_SESSION['name'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo $pageTitle; ?></title>
+  <title><?php echo $page_title; ?></title>
   <link rel="stylesheet" href="<?php echo $root_pass; ?>assets/css/style.css?<?php echo time(); ?>">
   <script defer src="<?php echo $root_pass; ?>assets/js/script.js?<?php echo time(); ?>"></script>
 </head>

@@ -14,7 +14,7 @@ if (!isset($_SESSION['join'])) {
 
 <?php
 // ヘッダー
-$pageTitle = '入力内容確認画面';
+$page_title = '入力内容確認画面';
 require_once($root_pass . 'template/header.php');
 ?>
 

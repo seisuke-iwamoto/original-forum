@@ -48,7 +48,7 @@ if (isset($_SESSION['id'])) {
 
 <?php
 // ヘッダー
-$pageTitle = 'ニックネーム変更画面';
+$page_title = 'ニックネーム変更画面';
 require_once($root_pass . 'template/header.php');
 ?>
 
