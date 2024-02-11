@@ -27,7 +27,7 @@ $username = $_SESSION['name'];
           <ul class="flex items-center h-[inherit]">
             <?php if (isset($_SESSION['id'])) : ?>
               <li class="h-[inherit]">
-                <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4" href="<?php echo $root_pass; ?>">
+                <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4" href="<?php echo $root_pass; ?>users/mypage/">
                   マイページ
                 </a>
               </li>
