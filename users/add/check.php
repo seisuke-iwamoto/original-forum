@@ -10,19 +10,6 @@ if (!isset($_SESSION['join'])) {
   header('Location: index.php');
   exit();
 }
-
-// 登録処理をする
-// if (!empty($_POST)) {
-//   $statement = $db->prepare('INSERT INTO users SET username=?, password=?, create_date=NOW()');
-//   echo $ret = $statement->execute(array(
-//     $_SESSION['join']['username'],
-//     sha1($_SESSION['join']['password']),
-//   ));
-//   unset($_SESSION['join']);
-
-//   header('Location: thanks.php');
-//   exit();
-// }
 ?>
 
 <?php
