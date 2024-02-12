@@ -9,17 +9,18 @@ session_start();
 if (isset($_SESSION['id'])) {
   // ログインしているユーザーのidと合致するニックネームをDBから検索
   $userid = $_SESSION['id'];
-  $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
-  $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
-  $stmt->execute();
+  $users = $db->prepare("SELECT nickname FROM users WHERE id = :id");
+  $users->bindParam(':id', $userid, PDO::PARAM_STR);
+  $users->execute();
+  $users_nickname = $users->fetch();
 
-  // 結果を取得
-  if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    // nicknameを取得
-    $nickname = $row['nickname'];
-  } else {
-    echo "該当するユーザーが見つかりません。";
-  }
+  // // 結果を取得
+  // if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  //   // nicknameを取得
+  //   $nickname = $row['nickname'];
+  // } else {
+  //   echo "該当するユーザーが見つかりません。";
+  // }
 
   // ニックネームの変更があればDBを更新
   if ($_POST['nickname']) {
@@ -31,12 +32,10 @@ if (isset($_SESSION['id'])) {
 
     // DBの更新が成功した場合、新しいニックネームを再取得
     if ($ret) {
-      $stmt = $db->prepare("SELECT nickname FROM users WHERE id = :id");
-      $stmt->bindParam(':id', $userid, PDO::PARAM_STR);
-      $stmt->execute();
-      if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $nickname = $row['nickname'];
-      }
+      $users = $db->prepare("SELECT nickname FROM users WHERE id = :id");
+      $users->bindParam(':id', $userid, PDO::PARAM_STR);
+      $users->execute();
+      $users_nickname = $users->fetch();
     }
   }
 } else {
@@ -59,13 +58,13 @@ require_once($root_pass . 'template/header.php');
     <form action="" method="POST" class="mt-12">
       <div class="mb-8">
         <label for="username" class="block text-gray-700 text-sm font-bold mb-2">ニックネーム</label>
-        <input type="text" id="nickname" name="nickname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="<?php echo $nickname; ?>">
+        <input type="text" id="nickname" name="nickname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="<?php echo htmlspecialchars($users_nickname['nickname'], ENT_QUOTES); ?>">
+        <?php if ($status == 'complete') : ?>
+          <p class="text-green-400 font-bold text-sm pt-4">
+            ニックネームを変更しました
+          </p>
+        <?php endif; ?>
       </div>
-      <?php if ($status == 'complete') : ?>
-        <p class="text-green-400 font-bold text-sm pt-4">
-          ニックネームを変更しました
-        </p>
-      <?php endif; ?>
       <div class="flex flex-col">
         <button class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           変更する
