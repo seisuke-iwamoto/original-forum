@@ -25,7 +25,15 @@ $username = $_SESSION['name'];
         </div>
         <nav class="h-[inherit]">
           <ul class="flex items-center h-[inherit]">
-            <?php if (isset($_SESSION['id'])) : ?>
+            <?php
+            // ログインしている時
+            if (isset($_SESSION['id'])) :
+            ?>
+              <li class="h-[inherit]">
+                <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4" href="<?php echo $root_pass; ?>questions/add/">
+                  質問を作成する
+                </a>
+              </li>
               <li class="h-[inherit]">
                 <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4" href="<?php echo $root_pass; ?>users/mypage/">
                   マイページ
@@ -42,7 +50,10 @@ $username = $_SESSION['name'];
                 <a class="hover:underline  text-black flex items-center justify-center h-[inherit] px-4 rounded" href="<?php echo $root_pass; ?>logout/">ログアウト
                 </a>
               </li>
-            <?php else : ?>
+            <?php 
+            // ログインしていない時
+            else : 
+            ?>
               <li class="h-[inherit]">
                 <a class="hover:underline text-black flex items-center justify-center h-[inherit] px-4 rounded" href="<?php echo $root_pass; ?>login/">
                   ログイン
