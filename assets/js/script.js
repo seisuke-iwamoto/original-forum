@@ -30,4 +30,23 @@ document.addEventListener('DOMContentLoaded', function () {
     dropDownMenu.addEventListener('mouseleave', function () {
         toggleSubmenu(false);
     });
+
+    // 質問投稿画面のテキストエリアのカウントダウン
+    function count_down() {
+        const obj = document.getElementById('questions_body');
+        const element = document.getElementById('count');
+        element.innerHTML = 1000 - obj.value.length;
+
+        if (1000 - obj.value.length < 0) {
+            element.style.color = '#EF4444';
+        } else {
+            element.style.color = '#000';
+        }
+    }
+
+    // イベントリスナーをテキストエリアに追加
+    const textarea = document.getElementById('questions_body');
+    if (textarea) {
+        textarea.addEventListener('keyup', count_down);
+    }
 });
