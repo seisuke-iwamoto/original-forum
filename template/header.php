@@ -16,7 +16,7 @@ $username = $_SESSION['name'];
 
 <body class="bg-gray-100">
   <div class="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen">
-    <header class="py-4 h-20">
+    <header class="my-4 h-20">
       <div class="bg-white shadow-md rounded-full h-[inherit] px-8 mx-auto container flex justify-between items-center">
         <div class="logo">
           <h1 class="text-black">
