@@ -671,6 +671,10 @@ video {
   margin-top: 2rem;
 }
 
+.mt-auto {
+  margin-top: auto;
+}
+
 .block {
   display: block;
 }
@@ -709,6 +713,18 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-48 {
+  min-height: 12rem;
+}
+
+.min-h-96 {
+  min-height: 24rem;
+}
+
+.min-h-60 {
+  min-height: 15rem;
 }
 
 .w-3\/5 {
@@ -861,6 +877,21 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.py-14 {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
 }
 
 .pt-4 {
