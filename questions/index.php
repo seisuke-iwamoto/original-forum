@@ -21,15 +21,22 @@ require_once($root_pass . 'template/header.php');
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <?php foreach ($posts as $post) : ?>
             <li class="bg-white rounded-lg shadow-lg p-4">
-                <h2 class="font-bold text-xl mb-2">
-                    <?php echo htmlspecialchars($post['nickname']); ?>
-                </h2>
-                <p>
-                    <?php echo mb_strimwidth(htmlspecialchars($post['body']), 0, 300, '...'); ?>
-                </p>
+                <a href="#" class="block hover:opacity-70 duration-300">
+                    <time class="text-sm mb-2">
+                        投稿日時：
+                        <?php echo htmlspecialchars($post['create_date']); ?>
+                    </time>
+                    <h2 class="font-bold text-xl mb-2">
+                        投稿者：
+                        <?php echo htmlspecialchars($post['nickname']); ?>
+                    </h2>
+                    <p>
+                        <?php echo mb_strimwidth(htmlspecialchars($post['body']), 0, 300, '...'); ?>
+                    </p>
+                </a>
             </li>
         <?php endforeach; ?>
-        </う>
+    </ul>
 </div>
 
 <?php
