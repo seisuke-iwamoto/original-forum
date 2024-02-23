@@ -16,37 +16,43 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ヘッダーのドロップダウンメニュー
-    const dropDownMenu = document.getElementById('dropDownMenu');
+    if (document.getElementById('dropDownMenu')) {
+        const dropDownMenu = document.getElementById('dropDownMenu');
 
-    function toggleSubmenu(isVisible) {
-        const dropDownSubMenu = dropDownMenu.querySelector('ul');
-        dropDownSubMenu.classList.toggle('hidden', !isVisible);
+        function toggleSubmenu(isVisible) {
+            const dropDownSubMenu = dropDownMenu.querySelector('ul');
+            dropDownSubMenu.classList.toggle('hidden', !isVisible);
+        }
+
+        dropDownMenu.addEventListener('mouseenter', function () {
+            toggleSubmenu(true);
+        });
+
+        dropDownMenu.addEventListener('mouseleave', function () {
+            toggleSubmenu(false);
+        });
     }
 
-    dropDownMenu.addEventListener('mouseenter', function () {
-        toggleSubmenu(true);
-    });
-
-    dropDownMenu.addEventListener('mouseleave', function () {
-        toggleSubmenu(false);
-    });
-
     // 質問投稿画面のテキストエリアのカウントダウン
-    function count_down() {
-        const obj = document.getElementById('questions_body');
-        const element = document.getElementById('count');
-        element.innerHTML = 1000 - obj.value.length;
+    if (document.getElementById('questions_body')) {
+        function count_down() {
+            const obj = document.getElementById('questions_body');
+            const element = document.getElementById('count');
+            element.innerHTML = 1000 - obj.value.length;
 
-        if (1000 - obj.value.length < 0) {
-            element.style.color = '#EF4444';
-        } else {
-            element.style.color = '#000';
+            if (1000 - obj.value.length < 0) {
+                element.style.color = '#EF4444';
+            } else {
+                element.style.color = '#000';
+            }
         }
     }
 
     // イベントリスナーをテキストエリアに追加
-    const textarea = document.getElementById('questions_body');
-    if (textarea) {
-        textarea.addEventListener('keyup', count_down);
+    if (document.getElementById('questions_body')) {
+        const textarea = document.getElementById('questions_body');
+        if (textarea) {
+            textarea.addEventListener('keyup', count_down);
+        }
     }
 });
