@@ -21,7 +21,7 @@ require_once($root_pass . 'template/header.php');
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <?php foreach ($questions as $question) : ?>
             <li class="bg-white rounded-lg shadow-lg p-4">
-                <a href="<?php echo $root_pass; ?>view.php?<?php echo htmlspecialchars($question['user_id']); ?>" class="block hover:opacity-70 duration-300">
+                <a href="view.php?id=<?php echo htmlspecialchars($question['id']); ?>" class="block h-full hover:opacity-70 duration-300">
                     <time class="text-sm mb-2">
                         投稿日時：
                         <?php echo htmlspecialchars($question['create_date']); ?>
