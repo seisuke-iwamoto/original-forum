@@ -27,14 +27,26 @@ require_once($root_pass . 'template/header.php');
 <div class="container mx-auto my-8">
   <?php if ($question) : ?>
     <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4">
-      <time class="text-sm mb-2">
-        投稿日時：
-        <?php echo htmlspecialchars($question['create_date']); ?>
-      </time>
-      <h2 class="font-bold text-xl mb-2">
-        投稿者：
-        <?php echo htmlspecialchars($question['nickname']); ?>
-      </h2>
+      <div class="flex items-end justify-between mb-4">
+        <div>
+          <time class="text-sm mb-2">
+            投稿日時：
+            <?php echo htmlspecialchars($question['create_date']); ?>
+          </time>
+          <h2 class="font-bold text-xl">
+            投稿者：
+            <?php echo htmlspecialchars($question['nickname']); ?>
+          </h2>
+        </div>
+        <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
+        <?php if ($_SESSION['id'] == $question['user_id']) : ?>
+          <div>
+            <a href="" class="text-red-500 text-sm font-bold hover:underline block">
+              質問を削除する
+            </a>
+          </div>
+        <?php endif; ?>
+      </div>
       <p>
         <?php echo mb_strimwidth(htmlspecialchars($question['body']), 0, 300, '...'); ?>
       </p>
