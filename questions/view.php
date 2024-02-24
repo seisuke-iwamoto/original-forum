@@ -41,7 +41,7 @@ require_once($root_pass . 'template/header.php');
         <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
         <?php if ($_SESSION['id'] == $question['user_id']) : ?>
           <div>
-            <a href="" class="text-red-500 text-sm font-bold hover:underline block">
+            <a href="./delete?id=<?php echo htmlspecialchars($question['id']) ?>" class="text-red-500 text-sm font-bold hover:underline block">
               質問を削除する
             </a>
           </div>
