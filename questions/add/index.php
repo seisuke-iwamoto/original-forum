@@ -42,7 +42,7 @@ require_once($root_pass . 'template/header.php');
     <form action="" method="POST">
       <div class="mb-4">
         <label for="username" class="block text-gray-700 text-sm font-bold mb-1">質問文</label>
-        <textarea id="questions_body" name="questions_body" class="shadow appearance-none border rounded w-full h-96 py-2 px-3 text-gray-700 leading-normal focus:outline-none focus:shadow-outline" placeholder="1000文字以内で質問内容を入力してください"><?php echo htmlspecialchars($_POST['questions_body'], ENT_QUOTES); ?></textarea>
+        <textarea id="body" name="questions_body" class="shadow appearance-none border rounded w-full h-96 py-2 px-3 text-gray-700 leading-normal focus:outline-none focus:shadow-outline" placeholder="1000文字以内で質問内容を入力してください"><?php echo htmlspecialchars($_POST['questions_body'], ENT_QUOTES); ?></textarea>
         <div class="flex items-center justify-end text-gray-400 text-sm mt-2">
           あと
           <span id="count" class="text-black text-base font-bold mx-1">1000</span>

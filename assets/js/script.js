@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 質問投稿画面のテキストエリアのカウントダウン
-    if (document.getElementById('questions_body')) {
+    if (document.getElementById('body')) {
         function count_down() {
-            const obj = document.getElementById('questions_body');
+            const obj = document.getElementById('body');
             const element = document.getElementById('count');
             element.innerHTML = 1000 - obj.value.length;
 
