@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // イベントリスナーをテキストエリアに追加
-    if (document.getElementById('questions_body')) {
-        const textarea = document.getElementById('questions_body');
+    if (document.getElementById('body')) {
+        const textarea = document.getElementById('body');
         if (textarea) {
             textarea.addEventListener('keyup', count_down);
         }
