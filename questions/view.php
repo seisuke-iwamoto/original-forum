@@ -51,7 +51,7 @@ require_once($root_pass . 'template/header.php');
         <?php echo mb_strimwidth(htmlspecialchars($question['body']), 0, 300, '...'); ?>
       </p>
       <div class="flex flex-col mt-12">
-        <a href="<?php echo $root_pass; ?>" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold text-center block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+        <a href="<?php echo $root_pass; ?>answers/add" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold text-center block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           回答する
         </a>
         <a href="<?php echo $root_pass; ?>questions" class="bg-gray-100 hover:bg-gray-300 duration-300 text-black font-bold text-center block py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline">質問一覧に戻る</a>
