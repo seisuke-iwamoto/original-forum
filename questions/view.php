@@ -15,6 +15,9 @@ if (empty($_REQUEST['id'])) {
 $questions_query = $db->prepare('SELECT u.nickname, q.* FROM users u, questions q WHERE u.id=q.user_id AND q.id=? ORDER BY q.create_date DESC');
 $questions_query->execute(array($_REQUEST['id']));
 $question = $questions_query->fetch();
+
+// セッションに質問のidを保存（回答作成画面に質問内容を表示させるため）
+$_SESSION['question_id'] = $_REQUEST['id'];
 ?>
 
 <?php
