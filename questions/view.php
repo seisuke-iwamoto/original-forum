@@ -43,7 +43,7 @@ require_once($root_pass . 'template/header.php');
 <div class="container mx-auto my-8">
   <?php if ($question) : ?>
     <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4">
-      <div class="flex items-end justify-between mb-4">
+      <div class="flex justify-between mb-4">
         <div>
           <time class="text-sm mb-2">
             投稿日時：
@@ -79,8 +79,8 @@ require_once($root_pass . 'template/header.php');
     </p>
   <?php endif; ?>
   <!-- 以下回答一覧 -->
-  <?php if ($answers) : ?>
-    <?php foreach ($answers as $answer) : ?>
+  <?php foreach ($answers as $answer) : ?>
+    <?php if (!$answer['delete_flag'] == true) : ?>
       <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-12">
         <div class="flex justify-between mb-4">
           <div>
@@ -106,12 +106,8 @@ require_once($root_pass . 'template/header.php');
           <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
         </p>
       </div>
-    <?php endforeach; ?>
-  <?php else : ?>
-    <p class="max-w-4xl mx-auto py-5">
-      回答がありません
-    </p>
-  <?php endif; ?>
+    <?php endif; ?>
+  <?php endforeach; ?>
 </div>
 
 <?php
