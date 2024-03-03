@@ -79,35 +79,37 @@ require_once($root_pass . 'template/header.php');
     </p>
   <?php endif; ?>
   <!-- 以下回答一覧 -->
-  <?php foreach ($answers as $answer) : ?>
-    <?php if (!$answer['delete_flag'] == true) : ?>
-      <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-12">
-        <div class="flex justify-between mb-4">
-          <div>
-            <time class="text-sm mb-2">
-              回答日時：
-              <?php echo htmlspecialchars($answer['create_date']); ?>
-            </time>
-            <h2 class="font-bold text-xl">
-              回答者：
-              <?php echo htmlspecialchars($answer['nickname']); ?>
-            </h2>
-          </div>
-          <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
-          <?php if ($_SESSION['id'] == $answer['user_id']) : ?>
+  <div class="mt-12">
+    <?php foreach ($answers as $answer) : ?>
+      <?php if (!$answer['delete_flag'] == true) : ?>
+        <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-6">
+          <div class="flex justify-between mb-4">
             <div>
-              <a href="../answers/delete?id=<?php echo htmlspecialchars($answer['id']) ?>" class="text-red-500 text-sm font-bold hover:underline block">
-                回答を削除する
-              </a>
+              <time class="text-sm mb-2">
+                回答日時：
+                <?php echo htmlspecialchars($answer['create_date']); ?>
+              </time>
+              <h2 class="font-bold text-xl">
+                回答者：
+                <?php echo htmlspecialchars($answer['nickname']); ?>
+              </h2>
             </div>
-          <?php endif; ?>
+            <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
+            <?php if ($_SESSION['id'] == $answer['user_id']) : ?>
+              <div>
+                <a href="../answers/delete?id=<?php echo htmlspecialchars($answer['id']) ?>" class="text-red-500 text-sm font-bold hover:underline block">
+                  回答を削除する
+                </a>
+              </div>
+            <?php endif; ?>
+          </div>
+          <p>
+            <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
+          </p>
         </div>
-        <p>
-          <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
-        </p>
-      </div>
-    <?php endif; ?>
-  <?php endforeach; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
 </div>
 
 <?php
