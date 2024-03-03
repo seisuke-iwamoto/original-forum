@@ -16,6 +16,19 @@ $questions_query = $db->prepare('SELECT u.nickname, q.* FROM users u, questions 
 $questions_query->execute(array($_REQUEST['id']));
 $question = $questions_query->fetch();
 
+// ログインのID、質問に紐づくユーザーID、質問のIDに合致する回答の情報を取得
+$answers_query = $db->prepare(
+  'SELECT u.nickname, a.* 
+FROM users u, answers a 
+WHERE u.id=a.user_id 
+AND a.question_id = ? 
+ORDER BY a.create_date
+ASC'
+);
+$answers_query->execute(array($_REQUEST['id']));
+$answers = $answers_query->fetchAll();
+// var_dump($answers);
+
 // セッションに質問のidを保存（回答作成画面に質問内容を表示させるため）
 $_SESSION['question_id'] = $_REQUEST['id'];
 ?>
@@ -61,8 +74,42 @@ require_once($root_pass . 'template/header.php');
       </div>
     </div>
   <?php else : ?>
-    <p class="py-5">
+    <p class="max-w-4xl mx-auto py-5">
       投稿は削除されたか、見つかりません
+    </p>
+  <?php endif; ?>
+  <!-- 以下回答一覧 -->
+  <?php if ($answers) : ?>
+    <?php foreach ($answers as $answer) : ?>
+      <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-12">
+        <div class="flex justify-between mb-4">
+          <div>
+            <time class="text-sm mb-2">
+              回答日時：
+              <?php echo htmlspecialchars($answer['create_date']); ?>
+            </time>
+            <h2 class="font-bold text-xl">
+              回答者：
+              <?php echo htmlspecialchars($answer['nickname']); ?>
+            </h2>
+          </div>
+          <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
+          <?php if ($_SESSION['id'] == $answer['user_id']) : ?>
+            <div>
+              <a href="./delete?id=<?php echo htmlspecialchars($answer['id']) ?>" class="text-red-500 text-sm font-bold hover:underline block">
+                回答を削除する
+              </a>
+            </div>
+          <?php endif; ?>
+        </div>
+        <p>
+          <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
+        </p>
+      </div>
+    <?php endforeach; ?>
+  <?php else : ?>
+    <p class="max-w-4xl mx-auto py-5">
+      回答がありません
     </p>
   <?php endif; ?>
 </div>
