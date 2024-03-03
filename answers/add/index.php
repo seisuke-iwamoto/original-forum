@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // ディレクトリ階層に合わせてファイルパスを定義
 $root_pass = '../../';
 require($root_pass . 'dbconect.php');
@@ -7,41 +8,26 @@ session_start();
 // ログインしているか確認
 if (isset($_SESSION['id'])) {
 
-  // 投稿詳細ページのURLから質問のIDを取得
-  $ref = $_SERVER['HTTP_REFERER'];
-  $url = parse_url($ref, PHP_URL_QUERY);
-  parse_str($url, $arr);
-  $val = $arr['id'];
+  // 確認画面からエラーの受け取りと削除
+  if (isset($_SESSION['errors'])) {
+    $_POST['answers_body'] = $_SESSION['answers_body'];
+    // セッションに 'errors' が存在する場合、その値を $errors に代入
+    $errors = $_SESSION['errors'];
+  } else {
+    // セッションに 'errors' が存在しない場合、$errors を空の配列に設定
+    $errors = [];
+  }
+  // 確認画面から受け取ったエラーのセッションを削除
+  unset($_SESSION['errors']);
+
   // 質問のIDと合致する質問文をDBから取得
   $questions_query = $db->prepare('SELECT q.* FROM questions q WHERE q.id=?');
-  $questions_query->execute(array($val));
+  $questions_query->execute(array($_SESSION['question_id']));
   $question = $questions_query->fetch();
-  
-  var_dump($question['id']);
-
-  // $_POSTが空でないかをチェック
-  if (!empty($_POST)) {
-    // ユーザーネームが空かどうかチェック
-    if ($_POST['answers_body'] == '') {
-      $error['answers_body'] = 'blank';
-    }
-    if (mb_strlen($_POST['answers_body']) > 1000) {
-      $error['answers_body'] = 'length';
-    }
-
-    // 入力内容にエラーがなければセッションに値を保存して確認画面へ進む
-    if (empty($error)) {
-      $_SESSION['answers'] = $_POST;
-      $_SESSION['question_id'] = $question['id'];
-      var_dump($_SESSION['question_id']);
-      // header('Location: check.php');
-      // exit();
-    }
-  }
 
   // 確認画面から入力画面に戻った際に入力内容を再現
   if ($_REQUEST['action'] == 'rewrite') {
-    $_POST = $_SESSION['answers'];
+    $_POST['answers_body'] = $_SESSION['answers_body'];
     $error['rewrite'] = true;
   }
 } else {
@@ -61,7 +47,7 @@ require_once($root_pass . 'template/header.php');
 <div class="flex items-center justify-center container mx-auto my-8">
   <div class="w-3/5 mx-auto bg-white rounded-lg shadow-lg p-6">
     <h2 class="font-bold text-xl mb-6">回答作成画面</h2>
-    <form action="" method="POST">
+    <form action="check.php" method="POST">
       <div class="mb-4">
         <label for="username" class="block text-gray-700 text-sm font-bold mb-1">質問内容</label>
         <div class="border-l-4 border-gray-200 pl-6 my-3">
@@ -78,11 +64,8 @@ require_once($root_pass . 'template/header.php');
           <span id="count" class="text-black text-base font-bold mx-1">1000</span>
           文字まで入力できます
         </div>
-        <?php if ($error['answers_body'] == 'blank') : ?>
-          <p class="text-red-500 font-bold text-sm text-right py-2">回答文を入力してください</p>
-        <?php endif; ?>
-        <?php if ($error['answers_body'] == 'length') : ?>
-          <p class="text-red-500 font-bold text-sm text-right py-2">回答文は1000文字以内で入力してください</p>
+        <?php if ($errors) : ?>
+          <p class="text-red-500 font-bold text-sm text-right py-2"><?php echo htmlspecialchars($errors['answers_body'], ENT_QUOTES); ?></p>
         <?php endif; ?>
       </div>
       <div class="flex flex-col">

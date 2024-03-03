@@ -5,13 +5,32 @@ session_start();
 $root_pass = '../../';
 require($root_pass . 'dbconect.php');
 
-// 投稿画面でセッション「answers」が保存されたかをチェック
-if (!isset($_SESSION['answers'])) {
-  header('Location: index.php');
-  exit();
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // セッションに回答文を保存
+  $_SESSION['answers_body']= $_POST['answers_body'];
+  
+  if (isset($_POST['answers_body'])) {
+    $answer = $_POST['answers_body'];
+  } else {
+    $answer = '';
+  }
 
-var_dump($_SESSION['question_id']);
+  $errors = [];
+
+  // パスワードのバリデーション
+  if (empty($answer)) {
+    $errors['answers_body'] = '回答文を入力してください';
+  } elseif (mb_strlen($_POST['answers_body']) > 1000) {
+    $errors['answers_body'] = '回答文は1000文字以内で入力してください';
+  }
+
+  // エラーがあればセッションに保存し、入力画面にリダイレクト
+  if (!empty($errors)) {
+    $_SESSION['errors'] = $errors;
+    header('Location: index.php');
+    exit;
+  }
+}
 
 // 質問のIDと合致する質問文をDBから取得
 $questions_query = $db->prepare('SELECT q.* FROM questions q WHERE q.id=?');
@@ -40,7 +59,7 @@ require_once($root_pass . 'template/header.php');
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">回答内容</label>
         <div class="w-full min-h-48 py-2 px-3 text-gray-700 mb-3">
-          <?php echo htmlspecialchars($_SESSION['answers']['answers_body'], ENT_QUOTES); ?>
+          <?php echo htmlspecialchars($_POST['answers_body'], ENT_QUOTES); ?>
         </div>
       </div>
       <div>
