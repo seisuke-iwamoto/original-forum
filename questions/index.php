@@ -5,9 +5,28 @@ $root_pass = '../';
 require($root_pass . 'dbconect.php');
 session_start();
 
-// 質問の投稿情報を取得
-$questions_query = $db->query('SELECT u.nickname, q.* FROM users u, questions q WHERE u.id=q.user_id ORDER BY q.create_date DESC');
-$questions = $questions_query->fetchAll(); //SQL文の結果を全て取り出し
+// ページャー用に現状のページ数を取得し変数に格納
+$page = $_REQUEST['page'];
+if ($page == '') {
+    $page = 1;
+}
+//$pageと１を比較して大きい方を$pageに格納
+$page = max($page, 1);
+
+// 質問の総数を取得
+$counts = $db->query('SELECT COUNT(*) AS cnt FROM questions');
+$cnt = $counts->fetch();
+// 質問総数を1ページあたりに表示する質問数で割りページ数を算出
+$maxPage = ceil($cnt['cnt'] / 9);
+// $pageの値が実際の総ページ数より大きい場合に実際の総ページを返す
+$page = min($page, $maxPage);
+// ページ数から１を引いて1ページあたりに表示する質問数をかけて各ページのスタート位置を算出する
+$start = ($page - 1) * 9;
+
+// $startの数値から1ページあたりに必要な質問数を取得
+$questions = $db->prepare('SELECT u.nickname, q.* FROM users u, questions q WHERE u.id=q.user_id ORDER BY q.create_date DESC LIMIT ?, 9');
+$questions->bindParam(1, $start, PDO::PARAM_INT);
+$questions->execute();
 ?>
 
 <?php
@@ -39,6 +58,28 @@ require_once($root_pass . 'template/header.php');
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
+    </ul>
+
+    <!-- ページャー -->
+    <ul class="flex items-center justify-center gap-4 mt-8">
+        <?php
+        if ($page > 1) {
+        ?>
+            <li class="bg-blue-500 hover:bg-blue-700 duration-300 text-white inline-block p-2 rounded-md focus:outline-none focus:shadow-outline">
+                <a href="index.php?page=<?php print($page - 1); ?>">前のページへ</a>
+            </li>
+        <?php
+        }
+        ?>
+        <?php
+        if ($page < $maxPage) {
+        ?>
+            <li class="bg-blue-500 hover:bg-blue-700 duration-300 text-white inline-block p-2 rounded-md focus:outline-none focus:shadow-outline">
+                <a href="index.php?page=<?php print($page + 1); ?>">次のページへ</a>
+            </li>
+        <?php
+        }
+        ?>
     </ul>
 </div>
 
