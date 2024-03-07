@@ -25,6 +25,30 @@ if (isset($_SESSION['id'])) {
   $questions_query->execute(array($_SESSION['question_id']));
   $question = $questions_query->fetch();
 
+  // 表示している質問に対しての回答数をDBから取得
+  $answer_count = $db->prepare(
+    'SELECT COUNT(*) 
+  AS answer_count 
+  FROM answers 
+  WHERE 
+  question_id = ?
+  AND
+  (delete_flag IS NULL OR delete_flag != 1)
+  '
+  );
+  $answer_count->execute(array($_REQUEST['id']));
+  $answer_total = $answer_count->fetch();
+
+  // 質問に対して回答数が100件を超えていたら質問詳細画面にリダイレクトしてエラー表示
+  if ($answer_total > 100) {
+    $answer_limit_over = '回答数が上限を超えているため回答することができません';
+    $_SESSION['answer_limit_over'] = $answer_limit_over;
+    // 質問詳細画面のURLを変数に格納
+    $question_url = '../../questions/view.php?id=' . $_REQUEST['id'];
+    header('Location:' . $question_url);
+    exit();
+  }
+
   // 確認画面から入力画面に戻った際に入力内容を再現
   if ($_REQUEST['action'] == 'rewrite') {
     $_POST['answers_body'] = $_SESSION['answers_body'];
