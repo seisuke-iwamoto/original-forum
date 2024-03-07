@@ -27,7 +27,6 @@ ASC'
 );
 $answers_query->execute(array($_REQUEST['id']));
 $answers = $answers_query->fetchAll();
-// var_dump($answers);
 
 // セッションに質問のidを保存（回答作成画面に質問内容を表示させるため）
 $_SESSION['question_id'] = $_REQUEST['id'];
@@ -42,7 +41,7 @@ require_once($root_pass . 'template/header.php');
 <!-- 投稿詳細画面 -->
 <div class="container mx-auto my-8">
   <?php if ($question) : ?>
-    <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4">
+    <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto mb-6 p-4">
       <div class="flex justify-between mb-4">
         <div>
           <time class="text-sm mb-2">
@@ -78,8 +77,17 @@ require_once($root_pass . 'template/header.php');
       投稿は削除されたか、見つかりません
     </p>
   <?php endif; ?>
+  <!-- 回答上限を超えている場合にエラー表示 -->
+  <?php if ($_SESSION['answer_limit_over']) : ?>
+    <div class="max-w-4xl mx-auto py-4">
+      <p class="text-red-500 font-bold text-sm">
+        <?php echo htmlspecialchars($_SESSION['answer_limit_over'], ENT_QUOTES); ?>
+        <?php unset($_SESSION['answer_limit_over']); ?>
+      </p>
+    </div>
+  <?php endif; ?>
   <!-- 以下回答一覧 -->
-  <div class="mt-12">
+  <div class="mt-6">
     <?php foreach ($answers as $answer) : ?>
       <?php if (!$answer['delete_flag'] == true) : ?>
         <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-6">
