@@ -36,15 +36,15 @@ if (isset($_SESSION['id'])) {
   (delete_flag IS NULL OR delete_flag != 1)
   '
   );
-  $answer_count->execute(array($_REQUEST['id']));
+  $answer_count->execute(array($_SESSION['question_id']));
   $answer_total = $answer_count->fetch();
 
   // 質問に対して回答数が100件を超えていたら質問詳細画面にリダイレクトしてエラー表示
-  if ($answer_total > 100) {
+  if ($answer_total['answer_count'] > 100) {
     $answer_limit_over = '回答数が上限を超えているため回答することができません';
     $_SESSION['answer_limit_over'] = $answer_limit_over;
     // 質問詳細画面のURLを変数に格納
-    $question_url = '../../questions/view.php?id=' . $_REQUEST['id'];
+    $question_url = '../../questions/view.php?id=' . $_SESSION['question_id'];
     header('Location:' . $question_url);
     exit();
   }
