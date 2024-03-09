@@ -67,7 +67,7 @@ require_once($root_pass . 'template/header.php');
       </div>
       <div class="mb-6">
         <label for="password" class="block text-gray-700 text-sm font-bold mb-2">パスワード</label>
-        <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="********" value="<?php echo htmlspecialchars($_POST['password'], ENT_QUOTES); ?>">
+        <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="半角英数字を含めた8文字以上" value="<?php echo htmlspecialchars($_POST['password'], ENT_QUOTES); ?>">
         <label class="block w-fit mt-1">
           <input type="checkbox" id="togglePassword">
           パスワードを表示
