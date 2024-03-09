@@ -66,9 +66,11 @@ require_once($root_pass . 'template/header.php');
         <?php echo mb_strimwidth(htmlspecialchars($question['body']), 0, 300, '...'); ?>
       </p>
       <div class="flex flex-col mt-12">
-        <a href="<?php echo $root_pass; ?>answers/add" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold text-center block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          回答する
-        </a>
+        <?php if (isset($_SESSION['id'])) : ?>
+          <a href="<?php echo $root_pass; ?>answers/add" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold text-center block py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            回答する
+          </a>
+        <?php endif; ?>
         <a href="<?php echo $root_pass; ?>questions" class="bg-gray-100 hover:bg-gray-300 duration-300 text-black font-bold text-center block py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline">質問一覧に戻る</a>
       </div>
     </div>
@@ -88,35 +90,43 @@ require_once($root_pass . 'template/header.php');
   <?php endif; ?>
   <!-- 以下回答一覧 -->
   <div class="mt-6">
-    <?php foreach ($answers as $answer) : ?>
-      <?php if (!$answer['delete_flag'] == true) : ?>
-        <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-6">
-          <div class="flex justify-between mb-4">
-            <div>
-              <time class="text-sm mb-2">
-                回答日時：
-                <?php echo htmlspecialchars($answer['create_date']); ?>
-              </time>
-              <h2 class="font-bold text-xl">
-                回答者：
-                <?php echo htmlspecialchars($answer['nickname']); ?>
-              </h2>
-            </div>
-            <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
-            <?php if ($_SESSION['id'] == $answer['user_id']) : ?>
+    <?php if ($$answers) : ?>
+      <?php foreach ($answers as $answer) : ?>
+        <?php if (!$answer['delete_flag'] == true) : ?>
+          <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-6">
+            <div class="flex justify-between mb-4">
               <div>
-                <a href="../answers/delete?id=<?php echo htmlspecialchars($answer['id']) ?>" class="text-red-500 text-sm font-bold hover:underline block">
-                  回答を削除する
-                </a>
+                <time class="text-sm mb-2">
+                  回答日時：
+                  <?php echo htmlspecialchars($answer['create_date']); ?>
+                </time>
+                <h2 class="font-bold text-xl">
+                  回答者：
+                  <?php echo htmlspecialchars($answer['nickname']); ?>
+                </h2>
               </div>
-            <?php endif; ?>
+              <!-- ログインしているIDと質問のユーザーIDが合致する質問のみに削除ボタンを表示 -->
+              <?php if ($_SESSION['id'] == $answer['user_id']) : ?>
+                <div>
+                  <a href="../answers/delete?id=<?php echo htmlspecialchars($answer['id']) ?>" class="text-red-500 text-sm font-bold hover:underline block">
+                    回答を削除する
+                  </a>
+                </div>
+              <?php endif; ?>
+            </div>
+            <p>
+              <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
+            </p>
           </div>
-          <p>
-            <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
-          </p>
-        </div>
-      <?php endif; ?>
-    <?php endforeach; ?>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    <?php else : ?>
+      <div class="max-w-4xl mx-auto">
+        <p>
+          回答がありません
+        </p>
+      </div>
+    <?php endif; ?>
   </div>
 </div>
 
