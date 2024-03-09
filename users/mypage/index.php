@@ -42,18 +42,6 @@ require_once($root_pass . 'template/header.php');
           <?php echo htmlspecialchars($users_details['nickname'], ENT_QUOTES); ?>
         </div>
       </div>
-      <div class="mb-6">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-1">質問数</label>
-        <div class="w-full py-1 px-3 text-gray-700 mb-3">
-          <?php echo htmlspecialchars($users_details[''], ENT_QUOTES); ?>
-        </div>
-      </div>
-      <div class="mb-6">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-1">回答数</label>
-        <div class="w-full py-1 px-3 text-gray-700 mb-3">
-          <?php echo htmlspecialchars($users_details[''], ENT_QUOTES); ?>
-        </div>
-      </div>
       <div>
         <a href="<?php echo $root_pass; ?>questions" class="bg-gray-100 hover:bg-gray-300 duration-300 text-black font-bold text-center block py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline">質問一覧に戻る</a>
       </div>
