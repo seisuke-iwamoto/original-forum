@@ -48,7 +48,7 @@ npm start
 > Yahoo!知恵袋の様な掲示板サイトへのアクセス
 
 ```
-http://localhost:8000/post
+http://localhost:8000/questions
 ```
 
 > phpMyAdminへのアクセス
