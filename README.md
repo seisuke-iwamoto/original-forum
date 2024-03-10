@@ -5,7 +5,7 @@ Yahoo!知恵袋を参考に掲示板サイトを作成
 
 ![掲示板アプリのログイン画面](./assets/img/login.jpg)
 
-> 投稿一覧画面
+> 質問一覧画面
 
 ![掲示板アプリの質問一覧画面](./assets/img/questions.jpg)
 
