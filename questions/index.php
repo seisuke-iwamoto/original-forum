@@ -16,16 +16,18 @@ $page = max($page, 1);
 // 質問の総数を取得
 $counts = $db->query('SELECT COUNT(*) AS cnt FROM questions');
 $cnt = $counts->fetch();
-// 質問総数を1ページあたりに表示する質問数で割りページ数を算出
+// 質問総数を1ページあたりに表示する質問数で割りページ数を算出（繰り上げ）
 $maxPage = ceil($cnt['cnt'] / 9);
 // $pageの値が実際の総ページ数より大きい場合に実際の総ページを返す
 $page = min($page, $maxPage);
 // ページ数から１を引いて1ページあたりに表示する質問数をかけて各ページのスタート位置を算出する
 $start = ($page - 1) * 9;
+// $startが1の時は0を返す（質問が1つしか無い時に質問が表示されない対策）
+$start = max($start, 0);
 
 // $startの数値から1ページあたりに必要な質問数を取得
 $questions = $db->prepare('SELECT u.nickname, q.* FROM users u, questions q WHERE u.id=q.user_id ORDER BY q.create_date DESC LIMIT ?, 9');
-$questions->bindParam(1, $start, PDO::PARAM_INT);
+$questions->bindValue(1, $start, PDO::PARAM_INT);
 $questions->execute();
 ?>
 
@@ -40,7 +42,7 @@ require_once($root_pass . 'template/header.php');
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <?php foreach ($questions as $question) : ?>
             <!-- delete_flagがtrueでない質問のみ表示 -->
-            <?php if (!$question['delete_flag'] == true) : ?>
+            <?php if (!$question['delete_flag'] == 1) : ?>
                 <li class="bg-white rounded-lg shadow-lg p-4">
                     <a href="view.php?id=<?php echo htmlspecialchars($question['id']); ?>" class="block h-full hover:opacity-70 duration-300">
                         <time class="text-sm mb-2">
