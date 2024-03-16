@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
 SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- 作成したテーブルにダミーデータを挿入
 INSERT INTO users (username, password, nickname)
-VALUES ('user', 'user', 'user');
+VALUES ('user', SHA1('user0000'), 'user');
 -- questionsテーブル作成
 CREATE TABLE IF NOT EXISTS questions (
   id INT AUTO_INCREMENT PRIMARY KEY,
