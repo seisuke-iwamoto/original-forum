@@ -4,6 +4,7 @@ services:
         build: .
         volumes:
             - .:/var/www/html
+            - /var/www/html/node_modules
         ports:
             - 8000:80
         container_name: php7.2-original-forum
