@@ -18,9 +18,5 @@ RUN npm install
 # その他のプロジェクトファイルのコピー
 COPY . .
 
-# Tailwind CSS のビルド
-RUN npm run start
-
 EXPOSE 80
 CMD ["apache2-foreground"]
-

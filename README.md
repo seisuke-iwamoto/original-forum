@@ -36,23 +36,30 @@ Yahoo!知恵袋を参考に掲示板サイトを作成
 > Dockerコンテナ起動
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
-> Tailwind.css起動（実行しないとHTMLにclassを指定してもCSSが反映されません）
+> コンテナ内でtailwindをビルド
 
 ```
-npm start
+docker exec -it php7.2-original-forum npm run tailwind-build
 ```
 
 > Yahoo!知恵袋の様な掲示板サイトへのアクセス
 
 ```
 http://localhost:8000/questions
+
+※コンテナ初回起動時に自動生成されるダミーアカウント
+ユーザーネーム：user
+パスワード：user0000
 ```
 
 > phpMyAdminへのアクセス
 
 ```
 http://localhost:8080
+
+ユーザ名：root
+パスワード：root
 ```
