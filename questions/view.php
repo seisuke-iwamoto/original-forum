@@ -90,9 +90,9 @@ require_once($root_pass . 'template/header.php');
   <?php endif; ?>
   <!-- 以下回答一覧 -->
   <div class="mt-6">
-    <?php if ($$answers) : ?>
+    <?php if ($answers) : ?>
       <?php foreach ($answers as $answer) : ?>
-        <?php if (!$answer['delete_flag'] == true) : ?>
+        <?php if (!$answer['delete_flag'] == 1) : ?>
           <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-4 mt-6">
             <div class="flex justify-between mb-4">
               <div>
