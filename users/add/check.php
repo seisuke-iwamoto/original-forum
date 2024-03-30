@@ -20,7 +20,6 @@ require_once($root_pass . 'template/header.php');
 
 <div class="flex items-center justify-center container mx-auto my-8">
   <form action="thanks.php" method="POST" class="mx-auto my-8">
-    <!-- <input type="hidden" name="action" value="submit"> -->
     <div class="w-96 mx-auto bg-white rounded-lg shadow-lg p-6">
       <h2 class="font-bold text-xl mb-4">会員登録内容確認</h2>
       <div class="mb-4">
