@@ -1,6 +1,6 @@
 -- original_forum_dbという名前のDBが無い時だけDBを新規作成（文字コードをutf8mb4に設定）
 CREATE DATABASE IF NOT EXISTS original_forum_db CHARACTER
-SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET utf8mb4 COLLATE utf8mb4_general_ci;
 -- 以降の処理はoriginal_forum_dbを使用
 USE original_forum_db;
 -- usersテーブルとカラム作成
@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  nickname VARCHAR(255) NOT NULL,
+  nickname VARCHAR(255) NOT NULL DEFAULT '未設定',
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) CHARACTER
-SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET utf8mb4 COLLATE utf8mb4_general_ci;
 -- 作成したテーブルにダミーデータを挿入
 INSERT INTO users (username, password, nickname)
-VALUES ('user', SHA1('user0000'), 'user');
+VALUES ('user', SHA1('user0000'), 'ダミーユーザー');
 -- questionsテーブル作成
 CREATE TABLE IF NOT EXISTS questions (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS questions (
   update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   delete_flag TINYINT(1) NOT NULL DEFAULT 0
 ) CHARACTER
-SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET utf8mb4 COLLATE utf8mb4_general_ci;
 -- 作成したテーブルにダミーデータを挿入
 INSERT INTO questions (user_id, body)
-VALUES (1, 'This is a test question.');
+VALUES (1, 'ダミー質問ダミー質問ダミー質問');
 -- answersテーブル作成
 CREATE TABLE IF NOT EXISTS answers (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS answers (
   update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   delete_flag TINYINT(1) NOT NULL DEFAULT 0
 ) CHARACTER
-SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET utf8mb4 COLLATE utf8mb4_general_ci;
 -- 作成したテーブルにダミーデータを挿入
 INSERT INTO answers (user_id, question_id, body)
-VALUES (1, 1, 'This is a test answer.');
+VALUES (1, 1, 'ダミー回答ダミー回答ダミー回答');
