@@ -1,7 +1,7 @@
 <?php
 // ディレクトリ階層に合わせてファイルパスを定義
 $root_pass = '../../';
-require($root_pass . 'dbconect.php');
+require($root_pass . 'config/dbconect.php');
 session_start();
 
 // $_POSTが空でないかをチェック

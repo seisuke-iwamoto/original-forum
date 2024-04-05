@@ -3,7 +3,7 @@ ob_start();
 session_start();
 // ディレクトリ階層に合わせてファイルパスを定義
 $root_pass = '../../';
-require($root_pass . 'dbconect.php');
+require($root_pass . 'config/dbconect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // セッションに回答文を保存
