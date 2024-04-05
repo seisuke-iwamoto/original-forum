@@ -2,8 +2,8 @@ version: '3'
 services:
     php:
         build:
-            context: .
-            dockerfile: ./docker/php/Dockerfile
+            context: . #ビルドする場所
+            dockerfile: ./docker/php/Dockerfile #ビルドしたディレクトリから見た時のDockerfileがあるディレクトリ
         volumes:
             - .:/var/www/html
             - /var/www/html/node_modules
@@ -14,8 +14,8 @@ services:
             - mysql # DB接続エラーになるためmysqlを先に立ち上げる
     mysql:
         build:
-            context: ./docker/mysql
-            dockerfile: Dockerfile
+            context: . #ビルドする場所
+            dockerfile: ./docker/mysql/Dockerfile #ビルドしたディレクトリから見た時のDockerfileがあるディレクトリ
         platform: linux/x86_64 #Mac M1
         volumes:
             - mysql_data:/var/lib/mysql
