@@ -5,4 +5,4 @@ FROM mysql:5.7
 COPY ./my.cnf /etc/mysql/conf.d/my.cnf
 
 # 初期化スクリプトをイメージ内に追加
-COPY ./mysql-init /docker-entrypoint-initdb.d
+COPY ../../db /docker-entrypoint-initdb.d
