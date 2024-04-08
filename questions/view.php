@@ -115,7 +115,7 @@ require_once($root_pass . 'template/header.php');
               <?php endif; ?>
             </div>
             <p>
-              <?php echo mb_strimwidth(htmlspecialchars($answer['body']), 0, 300, '...'); ?>
+              <?php echo htmlspecialchars($answer['body']); ?>
             </p>
           </div>
         <?php endif; ?>
