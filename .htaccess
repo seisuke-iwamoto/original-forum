@@ -1,13 +1,13 @@
 <IfModule mod_rewrite.c>
-  ; リライトエンジンを有効
+  #リライトエンジンを有効
   RewriteEngine On
-  ; リライトルールのベースURLをルートに指定
+  #リライトルールのベースURLをルートに指定
   RewriteBase /
   
-  ; リクエストされたファイルが実際にはサーバー上に存在しない場合にのみ、ルールを適用
+  #リクエストされたファイルが実際にはサーバー上に存在しない場合にのみ、ルールを適用
   RewriteCond %{REQUEST_FILENAME} !-f
-  ; リクエストされたディレクトリが実際にはサーバー上に存在しない場合にのみ、ルールを適用
+  #リクエストされたディレクトリが実際にはサーバー上に存在しない場合にのみ、ルールを適用
   RewriteCond %{REQUEST_FILENAME} !-d
-  ; リクエストされたURLがquestions/何かの形式であれば、それをquestions/view.php?id=何かにリライト
+  #リクエストされたURLがquestions/何かの形式であれば、それをquestions/view.php?id=何かにリライト
   RewriteRule ^questions/(.*)$ questions/view\.php?id=$1 [L]
 </IfModule>
