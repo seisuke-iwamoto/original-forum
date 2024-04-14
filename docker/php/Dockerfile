@@ -1,5 +1,8 @@
 FROM php:7.2-apache
 
+# mod_rewriteモジュールの有効化
+RUN a2enmod rewrite
+
 # PDO MySQL 拡張のインストール
 RUN docker-php-ext-install pdo_mysql
 
