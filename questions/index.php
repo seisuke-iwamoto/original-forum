@@ -44,7 +44,7 @@ require_once($root_pass . 'template/header.php');
             <!-- delete_flagがtrueでない質問のみ表示 -->
             <?php if (!$question['delete_flag'] == 1) : ?>
                 <li class="bg-white rounded-lg shadow-lg p-4">
-                    <a href="view.php?id=<?php echo htmlspecialchars($question['id']); ?>" class="block h-full hover:opacity-70 duration-300">
+                    <a href="/questions/<?php echo htmlspecialchars($question['id']); ?>" class="block h-full hover:opacity-70 duration-300">
                         <time class="text-sm mb-2">
                             投稿日時：
                             <?php echo htmlspecialchars($question['create_date']); ?>
